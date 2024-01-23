@@ -1,6 +1,7 @@
 # WebProject
 
 <table>
+  <caption>개발 계획</caption>
   <tr>
     <th></th> <th>1 / 23</th><th>1 / 24</th><th>1 / 25</th><th>1 / 26</th><th>1 / 27</th><th>1 / 28</th>
   </tr>
