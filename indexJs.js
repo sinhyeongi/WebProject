@@ -12,18 +12,18 @@ class listGame {
     this.body = document.querySelector('body');
     //이미지 경로 저장 변수
     this.backImgs = ["./img/nbb.png", "./img/back03.png", "./img/back3.png", "./img/home_b.png"];
-    //모든 버튼이 form 안에 존재 submit으로 인한 페이지 새로 고침 없애기
+    //모든 버튼이 form 안에 존재 submit으로 인한 페이지 새로 고침 방지
     [...document.querySelectorAll('button')].forEach(n => {
       n.addEventListener('click', (e) => {
         e.preventDefault();
       });
     });
-    // 현재 눌러야 할 번호
+    // 현재 눌러야 할 번호에 대한 변수
     this.count = 1;
-    // 유저가 입력한 번호
+    // 유저가 입력한 번호에 대한 변수
     this.max = 1;
     this.addEvent();
-    //시간 초 
+    //시간 초 단위
     this.playtime = 0;
     //플레이타임 인터벌 저장 변수
     this.play = null;
@@ -44,13 +44,15 @@ class listGame {
     this.playImg.src = './img/bug.png';
     this.ball = new Image();
     this.ball.src = "./img/minigame_1.png"
-
     this.movegameplay = null;
     this.movegameplaying = false;
     this.movegamereset = document.querySelector('.reset');
     this.movegamCount = 0;
+    //플레이 시간 기록 변수
     this.movegamePlayTime = 0;
+    //플레이 시간 기록 interval 
     this.movegamePlayTimer = null;
+    //공피하기 다시하기 버튼 이벤트
     this.movegamereset.addEventListener('click', (e) => {
       e.preventDefault();
       this.movegamCount = 0;
@@ -69,6 +71,7 @@ class listGame {
       };
       this.CreateBullet();
       this.DrawCanvas();
+      //초기 위치를 그리고 난 후 5초 뒤 게임 시작
       setTimeout(() => {
         this.movegameplay = setInterval(() => {
           if (!this.movegameplaying) { return; }
@@ -83,21 +86,25 @@ class listGame {
         }, 10);
       }, 2000);
     });
-
+    //플레이어 이동 방향
     this.move = {
-      87: false,
-      83: false,
-      65: false,
-      68: false
+      87: false,//w
+      83: false,//s
+      65: false,//a
+      68: false //d
     }
+    //플레이어 좌표,사이즈,충돌 값
     this.player = {
       x: (this.canvas.width / 2) - 25,
       y: (this.canvas.height / 2) - 25,
       life: 3,
       size: 50,
-      hit: false
+      hit: false,
+      speed : 3
     };
+    //움직이는듯한 이미지를 위한 x좌표값
     this.backx = 0;
+    //공피하기 게임을 위한 키 이벤트
     window.addEventListener('keydown', (e) => {
       this.move[e.keyCode] = true ?? '';
     });
@@ -115,8 +122,10 @@ class listGame {
         this.movegamePlayTime += 100;
     }, 100);
     this.movegameplay = setInterval(() => {
+      //현재 공피하기 게임 중인지 확인
       if (!this.movegameplaying) { return; }
       this.backx++;
+      //움직이는 듯한 이미지를 위한 값 변경
       if (this.backx > this.canvas.width) {
         this.backx = 0;
       }
@@ -128,6 +137,8 @@ class listGame {
   }
   //공 생성
   CreateBullet() {
+    //x 는 캔버스의 마지막 장소
+    //y 는 0 ~ 캔버스 마지막 0 ~ 보여질수있는 장소 끝 까지의 랜덤값
     this.player.hit = false;
     this.bullets = [];
     for (let i = 0; i < this.bulletcount; i++) {
@@ -146,13 +157,15 @@ class listGame {
   //충돌시 라이프를 1감소시키며 라이프가 0 이라면 게임을 종료 시킨다
   CheckBullet() {
     this.bullets.forEach(n => {
-      if (this.player.x + this.player.size > n.x &&
+      //충돌 검사
+      if ((!this.player.hit)&&this.player.x + this.player.size > n.x &&
         this.player.x < n.x + n.size &&
         this.player.y + this.player.size > n.y &&
-        this.player.y < n.y &&
-        (!this.player.hit)) {
+        this.player.y < n.y) {
+          //this.player.hit -> 플레이어가 공과 이미 충돌 한 상태 true -> 충돌 한 후 , false -> 충돌 전
         this.player.life--;
         this.player.hit = true;
+        //유저의 남은 라이프 확인
         if (this.player.life <= 0) {
           clearInterval(this.movegameplay);
           clearInterval(this.movegamePlayTimer);
@@ -174,11 +187,13 @@ class listGame {
   //첫번째 공이 화면 좌측으로 사라질경우 공을 다시 만들고 빠져나간다
   //호출시 전체 공의 x좌표를 1감소 시킨다
   BulletMove() {
+    //처음으로 만들어진 공만 체크 함 첫 공이 -공사이즈 도달 전에는 다시 안만들어짐
     if (this.bullets[0].x <= (this.bullets[0].size * -1)) {
       this.movegamCount++;
       this.CreateBullet();
       return;
     }
+    //공의 위치가 -사이즈 값이 아니라면 전체 공의 x좌표 + 1
     this.bullets.forEach(n => {
       n.x -= 1;
     })
@@ -202,11 +217,13 @@ class listGame {
       this.CreateTable();
       this.playGame();
     });
-    //다음 버튼 이벤트
+    //폼 안에있는 다음,이전 버튼 클릭 이벤트 추가
     this.forms.forEach((n, idx) => {
+      //다음 버튼 클릭 이벤트
       n.querySelector('.next').addEventListener('click', () => {
         let cidx = idx;
         n.style.display = 'none';
+        //자신의 뒤에 폼이 있느지 체크 없다면 인덱스 변경
         if (cidx == this.forms.length - 1) {
           cidx = -1;
         }
@@ -215,12 +232,13 @@ class listGame {
         if (cidx + 1 == 2) {
           this.movegameplaying = true;
         }
-        this.body.style.background = `url(${this.backImgs[cidx + 1]})`;
-        this.body.style.backgroundSize = "cover"
+        this.ChangeBackground(cidx+1);
       })
+      //이전 버튼 클릭 이벤트
       n.querySelector('.before').addEventListener('click', () => {
         n.style.display = 'none';
         let cidx = idx;
+        //자신의 앞에 폼이 있느지 체크 없다면 인덱스 변경
         if (cidx == 0) {
           cidx = this.forms.length;
         }
@@ -229,14 +247,21 @@ class listGame {
         if (cidx - 1 == 2) {
           this.movegameplaying = true;
         }
-        this.body.style.background = `url(${this.backImgs[cidx - 1]})`;
-        this.body.style.backgroundSize = "cover"
+        this.ChangeBackground(cidx-1);
       })
     });
   }
+  //body백그라운 변경
+  ChangeBackground(idx){
+    this.body.style.background = `url(${this.backImgs[idx]})`;
+    this.body.style.backgroundSize = "cover";
+  }
   //테이블 생성
   CreateTable() {
+    //입력 값이 0이하 이면 나가기
     if (this.count <= 0) { return; }
+    // this.count -> 1to n 의 input 값
+    // trcount -> 몇 줄을 만들 것이지 계산
     const trcount = parseInt(this.count / 10) + 1;
     let copyCount = parseInt(this.count);
     let number = 1;
@@ -249,14 +274,17 @@ class listGame {
       for (let i2 = 0; i2 < td; i2++) {
         const td = document.createElement('td');
         td.innerHTML = number++;
+        //td클릭 이벤트 추가
         td.addEventListener('click', () => {
           if (td.innerHTML == this.count) {
             this.count++;
             tr.removeChild(td)
+            //유저의 입력 값에 해당하는 값이라면 종료
             if (this.max < this.count) {
               clearInterval(this.play);
               this.table.innerHTML = `<h2>게임종료<h2> playTime : ${this.playtime / 1000}초`
               const data = this.getSaveData(this.max);
+              // 1 ~ max 까지의 값이 더 크거나 더 빠른 겨우에만 데이터를 저장
               if (((this.load("1to")?.max ?? 0) < data.max) || (data.max == this.load("1to").max && this.load("1to").playTime > data.playTime)) {
                 this.save("1to", data);
                 this.playlist();
@@ -274,6 +302,7 @@ class listGame {
   }
   //값 교환
   ChangeNumber() {
+    //1 to n 게임의 테이블 안에 있는 td가져오기
     const tds = [...this.table.querySelectorAll('td')];
     tds.forEach((n) => {
       const copy = n.innerHTML;
@@ -282,7 +311,7 @@ class listGame {
       target.innerHTML = copy;
     });
   }
-  //플레이 타임 기록 Intrval
+  //플레이 타임 기록 Intrval 0.1초 단위
   playGame() {
     this.playtime = 0;
     this.play = setInterval(() => {
@@ -290,34 +319,45 @@ class listGame {
     }, 100);
   }
   //UP & Down
+  //랜덤 정답 값 생성
   CreateNumber() {
     this.updownNumber = parseInt(Math.random() * 100) + 1;
   }
   //Up & Down게임 세팅
   updowninit() {
+    //시도 횟수 -> this.updowncount
     this.updowncount = 0;
     this.CreateNumber();
     this.updownBtn = this.forms[1].querySelector('div > button');
     this.updownBtnValue = this.forms[1].querySelector('div > input[type=number]');
     this.updowntext = this.forms[1].querySelector('.updownnumber');
+    //정답 입력 버튼 이벤트
     this.updownBtn.addEventListener('click', (e) => {
+      //플레이타임 기록 시작
       if (this.updowncount == 0)
         this.playGame();
+      //시도 횟수 증가
       this.updowncount++;
+      // 정답 입력 란 이 빈 경우 나가기
       if (!this.updownBtnValue.value) {
         return;
       } else if (this.updownBtnValue.value <= 0 || this.updownBtnValue.value > 100) {
+        // 입력 값이 있지만 0 이하 이거나 100초과의 값의 경우 출력
         this.updowntext.style.fontSize = '2em'
         this.updowntext.innerHTML = '1 ~ 100의 숫자중 입력해주세요';
         return;
       }
       this.updowntext.style.fontSize = '2em'
+      //만든 랜덤 값과 현재 입력 한 값이 같을경우
       if (this.updownBtnValue.value == this.updownNumber) {
+        //정답 입력 버튼 클릭 막기
         e.target.disabled = true;
         clearInterval(this.play);
         this.updowntext.innerHTML = `<h2>정답!</h2><h2>걸린 시간 : ${this.playtime / 1000}</h2><h2>시도 횟수 : ${this.updowncount}</h2>`;
+        //다시하기 버튼 생성
         const ubtn = document.createElement('button');
         ubtn.innerHTML = '다시 하기';
+        //다시 하기 버튼 이벤트
         ubtn.addEventListener('click', n2 => {
           n2.preventDefault();
           e.target.disabled = false;
@@ -326,6 +366,7 @@ class listGame {
           this.updowntext.style.fontSize = '12em'
           this.updowninit();
         });
+        //다시하기 버튼 추가
         this.updowntext.appendChild(ubtn);
         const data = this.getSaveData(this.updowncount);
         this.save("updown", data);
@@ -382,10 +423,10 @@ class listGame {
   //플레이어 위치변경
   moveplayer() {
     if (!this.movegameplaying) { return; }
-    this.move['87'] && this.player.y > 0 ? (this.player.y -= 3) : '';
-    this.move['83'] && this.player.y < this.canvas.height - this.player.size ? (this.player.y += 3) : '';
-    this.move['65'] && this.player.x > 0 ? (this.player.x -= 3) : '';
-    this.move['68'] && this.player.x < this.canvas.width - this.player.size ? (this.player.x += 3) : '';
+    this.move['87'] && this.player.y > 0 ? (this.player.y -= this.player.speed) : '';
+    this.move['83'] && this.player.y < this.canvas.height - this.player.size ? (this.player.y += this.player.speed) : '';
+    this.move['65'] && this.player.x > 0 ? (this.player.x -= this.player.speed) : '';
+    this.move['68'] && this.player.x < this.canvas.width - this.player.size ? (this.player.x += this.player.speed) : '';
   }
   //localStorage에 데이터 저장
   save(key, data) {
