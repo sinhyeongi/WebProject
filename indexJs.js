@@ -72,13 +72,9 @@ class listGame {
           this.movegamePlayTime += 100;
       }, 100);
       this.canvas.style.display = "block";
-      this.player = {
-        x: (this.canvas.width / 2) - 25,
-        y: (this.canvas.height / 2) - 25,
-        life: 3,
-        size: 50,
-        hit: false
-      };
+      this.player.x = (this.canvas.width / 2) - 25,
+      this.player.y = (this.canvas.width / 2) - 25,
+      this.player.life = 3;
       this.CreateBullet();
       this.DrawCanvas();
       //초기 위치를 그리고 난 후 5초 뒤 게임 시작
