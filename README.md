@@ -74,5 +74,5 @@
 > > > > Up & Down -> updown<br/>
 > > > > 총알피하기 -> canvas<br/>
 <hr/>
-<img src = "https://github.com/sinhyeongi/WebProject/assets/106128885/90f535f1-aae4-46c2-81bc-c42a107db648" />
+<img src = "https://github.com/sinhyeongi/WebProject/assets/106128885/0db5b347-aa99-4f4d-bb17-3578ea54074f" />
 
