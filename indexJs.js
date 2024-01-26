@@ -151,7 +151,6 @@ class listGame {
         this.player.y + this.player.size > n.y &&
         this.player.y < n.y &&
         (!this.player.hit)) {
-        console.log('321');
         this.player.life--;
         this.player.hit = true;
         if (this.player.life <= 0) {
