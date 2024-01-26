@@ -15,7 +15,7 @@
   <tr>
     <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/c8fd0725-2488-4834-8825-aa172e20be57"/></td>
     <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/e4835204-79fd-483d-8dcf-b51ef571cbc0"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/fc801572-2309-47ef-aa12-a190e7656369"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/d3391ff8-e935-4844-bfc8-fbdfd5a4873d"/></td>
     <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/2c2cd971-1104-4cec-95e7-b6b20e3257f9"/></td>
   </tr>
 </table>
