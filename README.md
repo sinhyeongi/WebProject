@@ -10,6 +10,15 @@
     <td>프로젝트 개발</td><td></td><td><----</td><td>-----</td><td>-----</td><td>----></td><td></td>
   </tr>
 </table>
+<h2>게임 화면</h2>
+<table>
+  <tr>
+    <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/c8fd0725-2488-4834-8825-aa172e20be57"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/e4835204-79fd-483d-8dcf-b51ef571cbc0"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/fc801572-2309-47ef-aa12-a190e7656369"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/2c2cd971-1104-4cec-95e7-b6b20e3257f9"/></td>
+  </tr>
+</table>
 <h2>1.주제</h2>  
 <pre>
   <code>
@@ -66,3 +75,4 @@
 > > > > 총알피하기 -> canvas<br/>
 <hr/>
 <img src = "https://github.com/sinhyeongi/WebProject/assets/106128885/90f535f1-aae4-46c2-81bc-c42a107db648" />
+
