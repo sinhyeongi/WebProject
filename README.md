@@ -13,10 +13,10 @@
 <h2>게임 화면</h2>
 <table>
   <tr>
-    <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/c8fd0725-2488-4834-8825-aa172e20be57"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/e4835204-79fd-483d-8dcf-b51ef571cbc0"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/d3391ff8-e935-4844-bfc8-fbdfd5a4873d"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/2c2cd971-1104-4cec-95e7-b6b20e3257f9"/></td>
+    <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/a7f7c6ac-041f-4b08-9832-a2326d1f15bb"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/197e2617-63d4-4d37-8796-dad48caa02d8"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/e5fcd711-8edd-496b-820c-bbf294a89726"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/baf94bbf-7f2a-482f-a2f2-c7f5b968311a"/></td>
   </tr>
 </table>
 <h2>1.주제</h2>  
