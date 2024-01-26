@@ -10,6 +10,16 @@ class listGame {
     this.itemCount = document.querySelector('.btn > input[type=number]');
     //백그라운드 변경
     this.body = document.querySelector('body');
+    //커서 이미 경로 변수 (50px, 50px 모두 동일)
+    this.cursorImg = ["./img/mouse.png","./img/mouse_revers270.png","./img/mouse_revers180.png","./img/mouse_revers90.png","./img/mouseend1.png","./img/mouseend2.png"];
+    //커서 이미지 변수 인덱스
+    this.cursorIdx = 0;
+    this.cursorinterval = setInterval(() => {
+      this.body.style.cursor = `url(${this.cursorImg[this.cursorIdx++]}) 25 25, auto`
+      if(this.cursorIdx >= this.cursorImg.length){
+        this.cursorIdx = 0;
+      }
+    }, 800);
     //이미지 경로 저장 변수
     this.backImgs = ["./img/nbb.png", "./img/back03.png", "./img/back3.png", "./img/home_b.png"];
     //모든 버튼이 form 안에 존재 submit으로 인한 페이지 새로 고침 방지
