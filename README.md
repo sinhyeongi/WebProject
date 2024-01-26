@@ -65,4 +65,4 @@
 > > > > Up & Down -> updown<br/>
 > > > > 총알피하기 -> canvas<br/>
 <hr/>
-![순서도 drawio](https://github.com/sinhyeongi/WebProject/assets/106128885/90f535f1-aae4-46c2-81bc-c42a107db648)=
+<img src = "https://github.com/sinhyeongi/WebProject/assets/106128885/90f535f1-aae4-46c2-81bc-c42a107db648" />
