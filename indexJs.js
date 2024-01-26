@@ -8,6 +8,7 @@ class listGame {
     //갯수 저장 버튼
     this.btn = document.querySelector('main > form > div > button');
     this.itemCount = document.querySelector('.btn > input[type=number]');
+    this.span = document.querySelector('span');
     //백그라운드 변경
     this.body = document.querySelector('body');
     //커서 이미 경로 변수 (50px, 50px 모두 동일)
@@ -77,6 +78,7 @@ class listGame {
       this.player.life = 3;
       this.CreateBullet();
       this.DrawCanvas();
+      this.span.innerHTML = "남은 목숨 : 3"
       //초기 위치를 그리고 난 후 5초 뒤 게임 시작
       setTimeout(() => {
         this.movegameplay = setInterval(() => {
@@ -170,6 +172,7 @@ class listGame {
         this.player.y < n.y) {
           //this.player.hit -> 플레이어가 공과 이미 충돌 한 상태 true -> 충돌 한 후 , false -> 충돌 전
         this.player.life--;
+        this.span.innerHTML = `남은 목숨 : ${this.player.life}`;
         this.player.hit = true;
         //유저의 남은 라이프 확인
         if (this.player.life <= 0) {
