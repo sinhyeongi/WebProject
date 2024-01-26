@@ -13,9 +13,9 @@
 <h2>게임 화면</h2>
 <table>
   <tr>
-    <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/a7f7c6ac-041f-4b08-9832-a2326d1f15bb"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/197e2617-63d4-4d37-8796-dad48caa02d8"/></td>
-    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/e5fcd711-8edd-496b-820c-bbf294a89726"/></td>
+    <td><img src ="https://github.com/sinhyeongi/WebProject/assets/106128885/9224d91d-ab60-4bb6-89ca-4d6056002ab5"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/c414df00-9e1b-4097-ad14-b6d27c1725de"/></td>
+    <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/ecc78470-9d8e-4c52-a2e1-29944eac61c3"/></td>
     <td><img src="https://github.com/sinhyeongi/WebProject/assets/106128885/baf94bbf-7f2a-482f-a2f2-c7f5b968311a"/></td>
   </tr>
 </table>
