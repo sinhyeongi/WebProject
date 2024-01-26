@@ -8,7 +8,7 @@ class listGame {
     //갯수 저장 버튼
     this.btn = document.querySelector('main > form > div > button');
     this.itemCount = document.querySelector('.btn > input[type=number]');
-    this.span = document.querySelector('span');
+    this.spans = [...document.querySelectorAll('span')];
     //백그라운드 변경
     this.body = document.querySelector('body');
     //커서 이미 경로 변수 (50px, 50px 모두 동일)
@@ -78,7 +78,7 @@ class listGame {
       this.player.life = 3;
       this.CreateBullet();
       this.DrawCanvas();
-      this.span.innerHTML = "남은 목숨 : 3"
+      this.spans[this.spans.length-1].innerHTML = "남은 목숨 : 3"
       //초기 위치를 그리고 난 후 5초 뒤 게임 시작
       setTimeout(() => {
         this.movegameplay = setInterval(() => {
@@ -172,12 +172,13 @@ class listGame {
         this.player.y < n.y) {
           //this.player.hit -> 플레이어가 공과 이미 충돌 한 상태 true -> 충돌 한 후 , false -> 충돌 전
         this.player.life--;
-        this.span.innerHTML = `남은 목숨 : ${this.player.life}`;
+        this.spans[this.spans.length-1].innerHTML = `남은 목숨 : ${this.player.life}`;
         this.player.hit = true;
         //유저의 남은 라이프 확인
         if (this.player.life <= 0) {
           clearInterval(this.movegameplay);
           clearInterval(this.movegamePlayTimer);
+          this.spans[this.spans.length-1].innerHTML = "GameOver"
           this.canvas.style.display = "none";
           this.forms[2].querySelectorAll('div')[2].innerHTML = `<h2>${this.movegamePlayTime / 1000}초 생존 피한 총알 갯수 : ${this.movegamCount}</h2>`;
           const data = {
@@ -223,7 +224,9 @@ class listGame {
       this.max = parseInt(this.count);
       this.table.innerHTML = '';
       this.itemCount.value = "";
+      this.spans[0].innerHTML += '1';
       this.CreateTable();
+      this.table.classList.add('on');
       this.playGame();
     });
     //폼 안에있는 다음,이전 버튼 클릭 이벤트 추가
@@ -287,11 +290,14 @@ class listGame {
         td.addEventListener('click', () => {
           if (td.innerHTML == this.count) {
             this.count++;
+            this.spans[0].innerHTML = `현재 타겟 : ${this.count}`;
             tr.removeChild(td)
             //유저의 입력 값에 해당하는 값이라면 종료
             if (this.max < this.count) {
               clearInterval(this.play);
               this.table.innerHTML = `<h2>게임종료<h2> playTime : ${this.playtime / 1000}초`
+              this.spans[0].innerHTML = "현재 타겟 :";
+              this.table.classList.remove('on');
               const data = this.getSaveData(this.max);
               // 1 ~ max 까지의 값이 더 크거나 더 빠른 겨우에만 데이터를 저장
               if (((this.load("1to")?.max ?? 0) < data.max) || (data.max == this.load("1to").max && this.load("1to").playTime > data.playTime)) {
@@ -347,6 +353,7 @@ class listGame {
         this.playGame();
       //시도 횟수 증가
       this.updowncount++;
+      this.spans[1].innerHTML = `현재 시도 횟 수 : ${this.updowncount}`;
       // 정답 입력 란 이 빈 경우 나가기
       if (!this.updownBtnValue.value) {
         return;
@@ -359,6 +366,7 @@ class listGame {
       this.updowntext.style.fontSize = '2em'
       //만든 랜덤 값과 현재 입력 한 값이 같을경우
       if (this.updownBtnValue.value == this.updownNumber) {
+        this.spans[1].innerHTML = `정답 !`;
         //정답 입력 버튼 클릭 막기
         e.target.disabled = true;
         clearInterval(this.play);
@@ -373,6 +381,7 @@ class listGame {
           this.updownBtnValue.value = '';
           this.updowntext.innerHTML = '??';
           this.updowntext.style.fontSize = '12em'
+          this.spans[1].innerHTML = `현재 시도 횟 수 :`;
           this.updowninit();
         });
         //다시하기 버튼 추가
